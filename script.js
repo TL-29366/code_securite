@@ -6,7 +6,7 @@ const questions = [
         image: "https://via.placeholder.com/500x300?text=Antivirus",
         answers: [
             "Protéger contre les virus",
-            "Accélérer l'ordinateur",
+            "Essais",
             "Améliorer la connexion Internet",
             "Faire des sauvegardes de fichiers"
         ],
