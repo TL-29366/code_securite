@@ -5,6 +5,11 @@ body {
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
+    padding: 50px;
+    background-image: url('images/background.png');  /* Remplace par ton chemin d'image */
+    background-size: cover;  /* L'image couvre toute la page */
+    background-position: center;  /* Centre l'image */
+    background-attachment: fixed;  /* Fait en sorte que l'image ne défile pas avec le contenu */
 }
 
 /* Conteneur du quiz */
@@ -80,15 +85,5 @@ body {
     height: 1200;    /* Garde la proportion de l'image */
     max-height: 1000px; /* Augmente la hauteur maximale de l'image à 1000px */
     object-fit: contain; /* Assure que l'image reste proportionnelle sans être coupée */
-}
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;  /* Tu peux garder cette couleur si tu veux un fond dégradé */
-    text-align: center;
-    padding: 50px;
-    background-image: url('images/background.png');  /* Remplace par ton chemin d'image */
-    background-size: cover;  /* L'image couvre toute la page */
-    background-position: center;  /* Centre l'image */
-    background-attachment: fixed;  /* Fait en sorte que l'image ne défile pas avec le contenu */
 }
 }
