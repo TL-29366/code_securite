@@ -81,5 +81,14 @@ body {
     max-height: 1000px; /* Augmente la hauteur maximale de l'image à 1000px */
     object-fit: contain; /* Assure que l'image reste proportionnelle sans être coupée */
 }
-
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;  /* Tu peux garder cette couleur si tu veux un fond dégradé */
+    text-align: center;
+    padding: 50px;
+    background-image: url('images/background.jpg');  /* Remplace par ton chemin d'image */
+    background-size: cover;  /* L'image couvre toute la page */
+    background-position: center;  /* Centre l'image */
+    background-attachment: fixed;  /* Fait en sorte que l'image ne défile pas avec le contenu */
+}
 }
