@@ -86,7 +86,7 @@ body {
     background-color: #f5f5f5;  /* Tu peux garder cette couleur si tu veux un fond dégradé */
     text-align: center;
     padding: 50px;
-    background-image: url('images/background.jpg');  /* Remplace par ton chemin d'image */
+    background-image: url('images/background.png');  /* Remplace par ton chemin d'image */
     background-size: cover;  /* L'image couvre toute la page */
     background-position: center;  /* Centre l'image */
     background-attachment: fixed;  /* Fait en sorte que l'image ne défile pas avec le contenu */
