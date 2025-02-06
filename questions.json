@@ -21,4 +21,7 @@
     },
     {
         "question": "Que doit-on faire en cas d'incendie ?",
-        "answers": ["Appeler les seco
+        "answers": ["Appeler les secours", "Courir sans prévenir personne", "Essayer d’éteindre seul sans alerter"],
+        "correct": 0
+    }
+]
