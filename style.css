@@ -73,11 +73,15 @@ body {
 
 /* Ajout pour l'image */
 #questionImage {
+/* Ajout pour l'image */
+#questionImage {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    max-width: 500%; /* Limite la largeur au maximum */
-    height: 1200px;    /* Garde la proportion de l'image */
-    max-height: 2000px; /* Limite la hauteur de l'image à 400px */
+    width: 90%; /* Augmente la largeur de l'image à 90% de son conteneur */
+    height: auto;    /* Garde la proportion de l'image */
+    max-height: 600px; /* Augmente la hauteur maximale de l'image à 600px */
     object-fit: contain; /* Assure que l'image reste proportionnelle sans être coupée */
+}
+
 }
