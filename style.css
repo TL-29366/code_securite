@@ -77,7 +77,7 @@ body {
     margin-left: auto;
     margin-right: auto;
     max-width: 500%; /* Limite la largeur au maximum */
-    height: auto;    /* Garde la proportion de l'image */
+    height: 1200px;    /* Garde la proportion de l'image */
     max-height: 2000px; /* Limite la hauteur de l'image à 400px */
     object-fit: contain; /* Assure que l'image reste proportionnelle sans être coupée */
 }
