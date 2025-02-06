@@ -3,20 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code de la Sécurité</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Quiz Sécurité</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        #questionImage {
+            width: 300px;
+            height: auto;
+            display: none; /* Caché par défaut */
+            margin: 10px 0;
+        }
+        .answer-btn {
+            display: block;
+            width: 80%;
+            margin: 5px auto;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #feedback {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-    <div class="quiz-container">
-        <h1>Code de la Sécurité</h1>
-        <div id="question-container">
-            <p id="question">Chargement...</p>
-            <div id="answer-buttons"></div>
-        </div>
-        <button id="next-button" class="hidden">Suivant</button>
-        <p id="score" class="hidden"></p>
-    </div>
-<img id="questionImage" src="" alt="Illustration de la question" style="width: 300px; height: auto; display: none;">
+
+    <h1>Quiz de Sécurité</h1>
+
+    <!-- Image de la question -->
+    <img id="questionImage" src="" alt="Illustration de la question">
+
+    <!-- Conteneur des questions -->
+    <div id="questionText"></div>
+
+    <!-- Conteneur des réponses -->
+    <div id="answersContainer"></div>
+
+    <!-- Message de feedback (bonne/mauvaise réponse) -->
+    <div id="feedback"></div>
+
+    <!-- Lien vers le fichier JavaScript -->
     <script src="script.js"></script>
+
 </body>
 </html>
