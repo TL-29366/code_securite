@@ -1,81 +1,90 @@
-let questions = [];
-let currentQuestionIndex = 0;
+let currentQuestion = 0;
 
-// Attendre que la page soit chargée avant de démarrer le quiz
-document.addEventListener("DOMContentLoaded", () => {
-    loadQuestions();
-});
-
-// Charger les questions depuis le fichier JSON
-async function loadQuestions() {
-    try {
-        const response = await fetch("questions.json");
-        if (!response.ok) {
-            throw new Error("Problème de chargement du fichier JSON.");
-        }
-        questions = await response.json();
-        console.log("Questions chargées :", questions); // Debug
-        loadQuestion();
-    } catch (error) {
-        console.error("Erreur lors du chargement des questions :", error);
+const questions = [
+    {
+        question: "Quel est le but d'un antivirus ?",
+        image: "https://via.placeholder.com/500x300?text=Antivirus",
+        answers: [
+            "Protéger contre les virus",
+            "Accélérer l'ordinateur",
+            "Améliorer la connexion Internet",
+            "Faire des sauvegardes de fichiers"
+        ],
+        correctAnswer: 0
+    },
+    {
+        question: "Qu'est-ce que le phishing ?",
+        image: "https://via.placeholder.com/500x300?text=Phishing",
+        answers: [
+            "Un type de malware",
+            "Une méthode de fraude par e-mail",
+            "Une technique de piratage par mot de passe",
+            "Un pare-feu"
+        ],
+        correctAnswer: 1
+    },
+    {
+        question: "Qu'est-ce qu'un mot de passe fort ?",
+        image: "https://via.placeholder.com/500x300?text=Mot+de+passe+fort",
+        answers: [
+            "Un mot de passe court avec des chiffres",
+            "Un mot de passe avec des majuscules et des caractères spéciaux",
+            "Un mot de passe sans chiffres",
+            "Un mot de passe facile à retenir"
+        ],
+        correctAnswer: 1
+    },
+    {
+        question: "Que doit-on faire pour se protéger d'un ransomware ?",
+        image: "https://via.placeholder.com/500x300?text=Ransomware",
+        answers: [
+            "Ouvrir tous les e-mails sans crainte",
+            "Faire des sauvegardes régulières de ses fichiers",
+            "Ne jamais utiliser de logiciel antivirus",
+            "Partager ses informations personnelles en ligne"
+        ],
+        correctAnswer: 1
     }
-}
+];
 
-// Fonction pour charger une question
-function loadQuestion() {
-    const currentQuestion = questions[currentQuestionIndex];
+function displayQuestion() {
+    const question = questions[currentQuestion];
+    const questionContainer = document.getElementById('question-container');
+    const answersContainer = document.getElementById('answers-container');
 
-    // Vérification que la question existe
-    if (!currentQuestion) {
-        console.error("Erreur : Question introuvable !");
-        return;
-    }
+    questionContainer.innerHTML = `<h2>${question.question}</h2><img src="${question.image}" alt="Image de la question" style="width: 100%; height: auto;">`;
 
-    // Afficher la question
-    document.getElementById("questionText").innerHTML = currentQuestion.question;
-
-    // Afficher l'image correspondante
-    const questionImage = document.getElementById("questionImage");
-    questionImage.src = currentQuestion.image;
-    questionImage.style.display = "block"; // Afficher l'image
-
-    // Afficher les réponses sous forme de boutons
-    const answersContainer = document.getElementById("answersContainer");
-    answersContainer.innerHTML = ""; // Effacer les anciennes réponses
-    currentQuestion.answers.forEach((answer, index) => {
-        const button = document.createElement("button");
-        button.classList.add("answer-btn");
-        button.innerText = answer;
-        button.onclick = () => handleAnswerClick(index);
-        answersContainer.appendChild(button);
+    answersContainer.innerHTML = "";
+    question.answers.forEach((answer, index) => {
+        const answerButton = document.createElement('button');
+        answerButton.innerHTML = answer;
+        answerButton.onclick = () => validateAnswer(index);
+        answersContainer.appendChild(answerButton);
     });
-
-    // Réinitialiser le message de feedback
-    document.getElementById("feedback").innerHTML = "";
 }
 
-// Fonction pour gérer le clic sur une réponse
-function handleAnswerClick(selectedIndex) {
-    const currentQuestion = questions[currentQuestionIndex];
-    const feedback = document.getElementById("feedback");
+function validateAnswer(selectedAnswer) {
+    const question = questions[currentQuestion];
+    const buttons = document.querySelectorAll('#answers-container button');
 
-    // Vérifier si la réponse est correcte
-    if (selectedIndex === currentQuestion.correct) {
-        feedback.innerHTML = "<p style='color: green;'>Bonne réponse ! ✅</p>";
+    if (selectedAnswer === question.correctAnswer) {
+        buttons[selectedAnswer].style.backgroundColor = "green";
     } else {
-        feedback.innerHTML = `<p style='color: red;'>Mauvaise réponse ❌ <br> La bonne réponse était : <strong>${currentQuestion.answers[currentQuestion.correct]}</strong></p>`;
+        buttons[selectedAnswer].style.backgroundColor = "red";
     }
 
-    // Désactiver les boutons après réponse
-    document.querySelectorAll(".answer-btn").forEach(btn => btn.disabled = true);
-
-    // Passer à la question suivante après 2 secondes
-    setTimeout(() => {
-        currentQuestionIndex++;
-        if (currentQuestionIndex < questions.length) {
-            loadQuestion();
-        } else {
-            document.getElementById("quiz").innerHTML = "<h2>Quiz terminé ! 🎉</h2>";
-        }
-    }, 2000);
+    buttons.forEach(button => button.disabled = true);
+    document.getElementById('next-button').style.display = "inline-block";
 }
+
+function nextQuestion() {
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+        displayQuestion();
+        document.getElementById('next-button').style.display = "none";
+    } else {
+        document.getElementById('quiz-container').innerHTML = "<h1>Félicitations, vous avez terminé le quiz!</h1>";
+    }
+}
+
+displayQuestion();
