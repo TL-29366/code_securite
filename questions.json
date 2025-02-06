@@ -1,11 +1,5 @@
 [
-    {
-        "question": "Que signifie un panneau de danger jaune et noir ?",
-        "answers": ["Zone de travaux", "Danger général", "Sortie d’urgence"],
-        "correct": 1,
-        "image": "images/Question1.jpg"
-    },
-    {
+        {
         "question": "Quel équipement de sécurité est obligatoire sur un chantier ?",
         "answers": ["Casque", "Lunettes de soleil", "Gants en laine"],
         "correct": 0,
