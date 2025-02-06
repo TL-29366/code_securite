@@ -1,11 +1,20 @@
 let questions = [];
 let currentQuestionIndex = 0;
 
+// Attendre que la page soit chargée avant de démarrer le quiz
+document.addEventListener("DOMContentLoaded", () => {
+    loadQuestions();
+});
+
 // Charger les questions depuis le fichier JSON
 async function loadQuestions() {
     try {
         const response = await fetch("questions.json");
+        if (!response.ok) {
+            throw new Error("Problème de chargement du fichier JSON.");
+        }
         questions = await response.json();
+        console.log("Questions chargées :", questions); // Debug
         loadQuestion();
     } catch (error) {
         console.error("Erreur lors du chargement des questions :", error);
@@ -16,13 +25,19 @@ async function loadQuestions() {
 function loadQuestion() {
     const currentQuestion = questions[currentQuestionIndex];
 
+    // Vérification que la question existe
+    if (!currentQuestion) {
+        console.error("Erreur : Question introuvable !");
+        return;
+    }
+
     // Afficher la question
     document.getElementById("questionText").innerHTML = currentQuestion.question;
 
     // Afficher l'image correspondante
     const questionImage = document.getElementById("questionImage");
     questionImage.src = currentQuestion.image;
-    questionImage.style.display = "block"; // Rendre l'image visible
+    questionImage.style.display = "block"; // Afficher l'image
 
     // Afficher les réponses sous forme de boutons
     const answersContainer = document.getElementById("answersContainer");
@@ -51,10 +66,10 @@ function handleAnswerClick(selectedIndex) {
         feedback.innerHTML = `<p style='color: red;'>Mauvaise réponse ❌ <br> La bonne réponse était : <strong>${currentQuestion.answers[currentQuestion.correct]}</strong></p>`;
     }
 
-    // Désactiver les boutons pour éviter de changer de réponse
+    // Désactiver les boutons après réponse
     document.querySelectorAll(".answer-btn").forEach(btn => btn.disabled = true);
 
-    // Attendre 2 secondes avant de passer à la question suivante
+    // Passer à la question suivante après 2 secondes
     setTimeout(() => {
         currentQuestionIndex++;
         if (currentQuestionIndex < questions.length) {
@@ -64,6 +79,3 @@ function handleAnswerClick(selectedIndex) {
         }
     }, 2000);
 }
-
-// Charger les questions au démarrage
-loadQuestions();
