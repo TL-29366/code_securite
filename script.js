@@ -1,22 +1,32 @@
-// Déclaration des variables globales
-let currentQuestionIndex = 0;
-let score = 0;
 let questions = [];
+let currentQuestionIndex = 0;
 
 // Charger les questions depuis le fichier JSON
+async function loadQuestions() {
+    try {
+        const response = await fetch("questions.json");
+        questions = await response.json();
+        loadQuestion();
+    } catch (error) {
+        console.error("Erreur lors du chargement des questions :", error);
+    }
+}
+
+// Fonction pour charger une question
 function loadQuestion() {
     const currentQuestion = questions[currentQuestionIndex];
 
-    // Affiche la question
-    questionText.innerHTML = currentQuestion.question;
+    // Afficher la question
+    document.getElementById("questionText").innerHTML = currentQuestion.question;
 
-    // Affiche l'image correspondante
+    // Afficher l'image correspondante
     const questionImage = document.getElementById("questionImage");
     questionImage.src = currentQuestion.image;
     questionImage.style.display = "block"; // Rendre l'image visible
 
     // Afficher les réponses sous forme de boutons
-    answersContainer.innerHTML = "";
+    const answersContainer = document.getElementById("answersContainer");
+    answersContainer.innerHTML = ""; // Effacer les anciennes réponses
     currentQuestion.answers.forEach((answer, index) => {
         const button = document.createElement("button");
         button.classList.add("answer-btn");
@@ -26,62 +36,34 @@ function loadQuestion() {
     });
 
     // Réinitialiser le message de feedback
-    feedback.innerHTML = "";
+    document.getElementById("feedback").innerHTML = "";
 }
 
+// Fonction pour gérer le clic sur une réponse
+function handleAnswerClick(selectedIndex) {
+    const currentQuestion = questions[currentQuestionIndex];
+    const feedback = document.getElementById("feedback");
 
-// Affiche une question et ses réponses
-function showQuestion() {
-    const questionElement = document.getElementById("question");
-    const answerButtons = document.getElementById("answer-buttons");
-    const nextButton = document.getElementById("next-button");
-
-    // Effacer les anciennes réponses
-    answerButtons.innerHTML = "";
-
-    // Récupérer la question actuelle
-    const question = questions[currentQuestionIndex];
-    questionElement.textContent = question.question;
-
-    // Ajouter les boutons de réponse
-    question.answers.forEach((answer, index) => {
-        const button = document.createElement("button");
-        button.textContent = answer;
-        button.classList.add("btn");
-        button.onclick = () => checkAnswer(index);
-        answerButtons.appendChild(button);
-    });
-
-    nextButton.classList.add("hidden"); // Cacher le bouton "Suivant" au départ
-}
-
-// Vérifie si la réponse sélectionnée est correcte
-function checkAnswer(selectedIndex) {
-    const question = questions[currentQuestionIndex];
-
-    if (selectedIndex === question.correct) {
-        score++; // Incrémenter le score si bonne réponse
-    }
-
-    document.getElementById("next-button").classList.remove("hidden"); // Montrer le bouton "Suivant"
-}
-
-// Passe à la question suivante ou affiche le score final
-document.getElementById("next-button").addEventListener("click", () => {
-    currentQuestionIndex++;
-    if (currentQuestionIndex < questions.length) {
-        showQuestion();
+    // Vérifier si la réponse est correcte
+    if (selectedIndex === currentQuestion.correct) {
+        feedback.innerHTML = "<p style='color: green;'>Bonne réponse ! ✅</p>";
     } else {
-        showScore();
+        feedback.innerHTML = `<p style='color: red;'>Mauvaise réponse ❌ <br> La bonne réponse était : <strong>${currentQuestion.answers[currentQuestion.correct]}</strong></p>`;
     }
-});
 
-// Affiche le score final à la fin du quiz
-function showScore() {
-    document.getElementById("question-container").classList.add("hidden"); // Cacher les questions
-    document.getElementById("score").textContent = `Score final : ${score} / ${questions.length}`;
-    document.getElementById("score").classList.remove("hidden");
+    // Désactiver les boutons pour éviter de changer de réponse
+    document.querySelectorAll(".answer-btn").forEach(btn => btn.disabled = true);
+
+    // Attendre 2 secondes avant de passer à la question suivante
+    setTimeout(() => {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+            loadQuestion();
+        } else {
+            document.getElementById("quiz").innerHTML = "<h2>Quiz terminé ! 🎉</h2>";
+        }
+    }, 2000);
 }
 
-// Démarrer le quiz
+// Charger les questions au démarrage
 loadQuestions();
