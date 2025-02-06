@@ -1,0 +1,24 @@
+[
+    {
+        "question": "Que signifie un panneau de danger jaune et noir ?",
+        "answers": ["Zone de travaux", "Danger général", "Sortie d’urgence"],
+        "correct": 1
+    },
+    {
+        "question": "Quel équipement de sécurité est obligatoire sur un chantier ?",
+        "answers": ["Casque", "Lunettes de soleil", "Gants en laine"],
+        "correct": 0
+    },
+    {
+        "question": "Quelle est la couleur du panneau d’interdiction ?",
+        "answers": ["Rouge", "Bleu", "Vert"],
+        "correct": 0
+    },
+    {
+        "question": "Que signifie le sigle EPI ?",
+        "answers": ["Équipement de Protection Individuelle", "Évaluation de Précaution Industrielle", "Engin de Protection Incendie"],
+        "correct": 0
+    },
+    {
+        "question": "Que doit-on faire en cas d'incendie ?",
+        "answers": ["Appeler les seco
