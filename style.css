@@ -4,12 +4,6 @@ body {
     text-align: center;
     background-color: #f4f4f4;
     margin: 0;
-    padding: 0;
-    padding: 50px;
-    background-image: url('images/background.png');  /* Remplace par ton chemin d'image */
-    background-size: cover;  /* L'image couvre toute la page */
-    background-position: center;  /* Centre l'image */
-    background-attachment: fixed;  /* Fait en sorte que l'image ne défile pas avec le contenu */
 }
 
 /* Conteneur du quiz */
