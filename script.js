@@ -4,11 +4,31 @@ let score = 0;
 let questions = [];
 
 // Charger les questions depuis le fichier JSON
-async function loadQuestions() {
-    const response = await fetch("questions.json"); // Récupère le fichier JSON
-    questions = await response.json(); // Convertit en objet JavaScript
-    showQuestion(); // Affiche la première question
+function loadQuestion() {
+    const currentQuestion = questions[currentQuestionIndex];
+
+    // Affiche la question
+    questionText.innerHTML = currentQuestion.question;
+
+    // Affiche l'image correspondante
+    const questionImage = document.getElementById("questionImage");
+    questionImage.src = currentQuestion.image;
+    questionImage.style.display = "block"; // Rendre l'image visible
+
+    // Afficher les réponses sous forme de boutons
+    answersContainer.innerHTML = "";
+    currentQuestion.answers.forEach((answer, index) => {
+        const button = document.createElement("button");
+        button.classList.add("answer-btn");
+        button.innerText = answer;
+        button.onclick = () => handleAnswerClick(index);
+        answersContainer.appendChild(button);
+    });
+
+    // Réinitialiser le message de feedback
+    feedback.innerHTML = "";
 }
+
 
 // Affiche une question et ses réponses
 function showQuestion() {
