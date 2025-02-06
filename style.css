@@ -80,7 +80,7 @@ body {
     margin-right: auto;
     width: 90%; /* Augmente la largeur de l'image à 90% de son conteneur */
     height: auto;    /* Garde la proportion de l'image */
-    max-height: 600px; /* Augmente la hauteur maximale de l'image à 600px */
+    max-height: 1000px; /* Augmente la hauteur maximale de l'image à 1000px */
     object-fit: contain; /* Assure que l'image reste proportionnelle sans être coupée */
 }
 
