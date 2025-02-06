@@ -11,10 +11,14 @@
             margin: 20px;
         }
         #questionImage {
-            width: 100%;
-            height: 1200px;
-            display: none; /* Caché par défaut */
-            margin: 10px 0;
+           display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    max-width: 100%; /* Limite la largeur au maximum */
+    height: auto;    /* Garde la proportion de l'image */
+    max-height: 400px; /* Limite la hauteur de l'image */
+    object-fit: contain; /* Assure que l'image reste proportionnelle sans être coupée */
         }
         .answer-btn {
             display: block;
